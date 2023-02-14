@@ -1,0 +1,24 @@
+<h1>Dirty Check & Reset the Form</h1>
+<div  class="row" [formGroup]="userFormGroup">
+      <div class="col-12 col-sm-6 col-xl-3 ">
+        <div class="form-group">
+          <label>First Name</label> 
+          <input type="text" formControlName="firstName" class="form-control" />
+          <div>
+            {{userFormGroup.controls.firstName.errors | json}}
+          </div>
+        </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="form-group" *ngFor="let form0 of userFormGroup?.controls.skills.controls" [formGroup]="form0">
+      <label>Skill Name (Nested) </label> 
+      <input type="text" formControlName="skillName" class="form-control" />
+      <div *ngIf="form0.controls.skillName.touched && form0.controls.skillName.errors?.minlength">
+        Must have minimum of atleast {{form0.controls.skillName.errors?.minlength?.requiredLength}} characters
+      </div>
+    </div>
+    <hr />
+  </div>
+</div>
+<button class="btn btn-primary" (click)="reset()">Reset</button>
+<button class="btn btn-primary" (click)="submit()">Submit</button>
