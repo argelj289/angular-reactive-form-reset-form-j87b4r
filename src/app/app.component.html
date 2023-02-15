@@ -4,8 +4,8 @@
         <div class="form-group">
           <label>First Name</label> 
           <input type="text" formControlName="firstName" class="form-control" />
-          <div>
-            {{userFormGroup.controls.firstName.errors | json}}
+          <div *ngIf="userFormGroup.controls.firstName.touched && userFormGroup.controls.firstName.errors">
+            Must have minimum of atleast {{userFormGroup.controls.firstName.errors?.minlength?.requiredLength}} characters
           </div>
         </div>
   </div>
@@ -21,4 +21,5 @@
   </div>
 </div>
 <button class="btn btn-primary" (click)="reset()">Reset</button>
+&nbsp;
 <button class="btn btn-primary" (click)="submit()">Submit</button>
